@@ -268,6 +268,18 @@ mark{background:var(--lemon);color:inherit;border-radius:4px;padding:0 2px}
 .sticky-save{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);display:flex;justify-content:center;margin-top:16px;pointer-events:none;z-index:2}
 .sticky-save .btn{pointer-events:auto;padding:14px 24px;font-size:15px;width:min(100%,420px)}
 
+/* ===== 번역 기록 ===== */
+.hlist{display:flex;flex-direction:column;gap:12px}
+.hday{font-size:13px;font-weight:900;color:var(--ink-2);margin:10px 4px 0}
+.hitem{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:start;background:var(--surface);border-radius:22px;padding:14px 14px 14px 18px;box-shadow:var(--shadow);border:var(--card-border)}
+.hitem.cur{outline:3px solid var(--accent);outline-offset:-3px}
+.h-open{border:0;background:transparent;padding:0;text-align:left;min-width:0;display:flex;flex-direction:column;gap:4px;color:var(--ink)}
+.h-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:12px;color:var(--ink-3);font-weight:700}
+.h-lang{font-family:var(--font-tr);font-size:11px;font-weight:400;background:var(--mint);color:var(--ink);border-radius:999px;padding:1px 8px}
+.h-vi{font-family:var(--font-vi);font-size:16px;font-weight:800;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.h-tr{font-family:var(--font-tr);font-size:14px;color:var(--ink-2);display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.hitem .icon-btn{box-shadow:none;background:var(--surface-2);width:38px;height:38px}
+
 /* ===== 단어장 ===== */
 .toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
 .toolbar input[type=search]{flex:1;min-width:160px;border:0;border-radius:999px;padding:12px 18px;background:var(--surface);font-weight:700;box-shadow:var(--shadow);border:var(--card-border)}
@@ -368,6 +380,7 @@ h2.h{font-size:17px;font-weight:900;margin:0 0 8px}
     <a class="brand" href="#analyze"><svg class="logo-svg" viewBox="0 0 108 108" aria-hidden="true"><rect width="108" height="108" rx="26" fill="#6E56CF"/><rect x="27" y="27" width="54" height="54" rx="18" fill="#FFE3D6" transform="rotate(-8 54 54)"/><path transform="translate(37.83 70.00) scale(0.04539 -0.04539)" fill="#2A2540" d="M159.6866455078125 0Q113.277099609375 0 88.7530517578125 24.5240478515625Q64.22900390625 49.048095703125 64.22900390625 95.4576416015625V609.5423583984375Q64.22900390625 655.951904296875 88.7530517578125 680.4759521484375Q113.277099609375 705 159.6866455078125 705H355.602294921875Q539.6263427734375 705 640.2769165039062 613.0421752929688Q740.927490234375 521.0843505859375 740.927490234375 353Q740.927490234375 268.6385498046875 715.150390625 203.1385498046875Q689.373291015625 137.6385498046875 639.9576416015625 92.31927490234375Q590.5419921875 47 519.1685180664062 23.5Q447.7950439453125 0 355.602294921875 0ZM247.7828369140625 149.42138671875H344.4095458984375Q396.831298828125 149.42138671875 435.3072509765625 162.04791259765625Q473.783203125 174.6744384765625 499.49407958984375 199.74676513671875Q525.2049560546875 224.819091796875 537.6507568359375 263.0179443359375Q550.0965576171875 301.216796875 550.0965576171875 353Q550.0965576171875 456.56640625 498.99407958984375 506.072509765625Q447.8916015625 555.57861328125 344.4095458984375 555.57861328125H247.7828369140625ZM39.0240478515625 290.843505859375Q6.722900390625 290.843505859375 -10.885498046875 307.8133544921875Q-28.493896484375 324.783203125 -28.493896484375 355.722900390625Q-28.493896484375 387.0240478515625 -10.885498046875 403.81317138671875Q6.722900390625 420.602294921875 39.0240478515625 420.602294921875H372.2408447265625Q404.819091796875 420.602294921875 422.2889404296875 403.993896484375Q439.7587890625 387.385498046875 439.7587890625 355.722900390625Q439.7587890625 324.783203125 422.2889404296875 307.8133544921875Q404.819091796875 290.843505859375 372.2408447265625 290.843505859375Z"/></svg><b>Đọc</b><span class="sub">베트남어 노트</span></a>
     <nav class="tabs" aria-label="화면">
       <a href="#analyze" data-tab="analyze"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h8M8 3v2M5.5 5c1 3.5 3.5 6 6.5 7M10.5 5c-.8 3.6-3 6.6-6.5 8"/><path d="m13 21 4-9 4 9M14.5 18h5"/></svg><span class="lbl">번역</span></a>
+      <a href="#history" data-tab="history"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="lbl">기록</span></a>
       <a href="#words" data-tab="words"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg><span class="lbl">단어장</span></a>
       <a href="#review" data-tab="review"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="14" height="14" rx="3"/><path d="M7 3h11a3 3 0 0 1 3 3v11"/></svg><span class="lbl">복습</span><span class="count" id="dueCount" hidden>0</span></a>
       <a href="#settings" data-tab="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg><span class="lbl">설정</span></a>
@@ -401,6 +414,14 @@ h2.h{font-size:17px;font-weight:900;margin:0 0 8px}
   </section>
 
   <!-- 단어장 -->
+  <section id="view-history" hidden>
+    <div class="toolbar">
+      <input id="hSearch" type="search" placeholder="원문이나 번역으로 찾기" aria-label="번역 기록 검색">
+      <span class="hint" id="hTotal"></span>
+    </div>
+    <div id="hList"></div>
+  </section>
+
   <section id="view-words" hidden>
     <div class="toolbar">
       <input id="wSearch" type="search" placeholder="단어나 뜻으로 찾기" aria-label="단어장 검색">
@@ -443,8 +464,12 @@ h2.h{font-size:17px;font-weight:900;margin:0 0 8px}
     </div>
     <div class="card pad">
       <h2 class="h">번역 기록</h2>
-      <label class="chk"><input type="checkbox" id="keepLast"> 앱을 다시 열 때 마지막 번역 이어서 보기</label>
-      <p class="hint" style="margin:8px 0 0">끄면 번역한 메일 내용이 이 기기에 남지 않아요. 저장한 단어는 이 설정과 상관없이 단어장에 남아요.</p>
+      <label class="chk"><input type="checkbox" id="histOn"> 번역한 글을 기록에 남기기</label>
+      <div class="field"><label for="histMax">최대 보관 개수</label>
+        <select id="histMax"><option value="10">최근 10개</option><option value="30">최근 30개</option><option value="50">최근 50개</option></select></div>
+      <div class="row"><button class="btn" id="histClear">기록 모두 지우기</button></div>
+      <p class="hint" style="margin:8px 0 0">기록은 이 기기에만 저장되고 GitHub로 동기화되지 않아요. 업무 메일 내용이 남기 때문에 공용 기기에서는 꺼 두세요. 저장한 단어는 이 설정과 상관없이 단어장에 남아요.</p>
+      <div class="status" id="histStatus" role="status" aria-live="polite"></div>
     </div>
     <div class="card pad">
       <h2 class="h">발음</h2>
@@ -757,7 +782,81 @@ Rules:
 }
 
 /* ---------- 번역 실행: 번역 먼저 → 단어는 뒤에서 → 분석은 펼칠 때 ---------- */
-function persistLast(){ if (lsGet("doc-vi.keepLast")) lsSet(K.last, { lang:state.lang, src:state.srcText, results:state.results }); }
+/* ---------- 번역 기록 (이 기기에만 저장) ---------- */
+const HIST = { key:"doc-vi.history.v1", on:"doc-vi.hist.off", max:"doc-vi.hist.max" };
+const histOn = () => !lsGet(HIST.on);
+const histMax = () => [10,30,50].includes(lsGet(HIST.max)) ? lsGet(HIST.max) : 30;
+function loadHist(){ const v = lsGet(HIST.key); return Array.isArray(v) ? v : []; }
+function writeHist(list){
+  list = list.slice(0, histMax());
+  while (true){
+    try{ localStorage.setItem(HIST.key, JSON.stringify(list)); return true; }
+    catch(e){ if (list.length <= 1) return false; list.pop(); }       // 저장 공간이 차면 오래된 것부터 정리
+  }
+}
+function persistLast(){
+  if (!histOn() || !state.histId || !state.srcText) return;
+  const hasAny = Object.values(state.results).some(r => r?.sentences?.some(s => s.tState === "ok"));
+  if (!hasAny) return;
+  const list = loadHist(); const old = list.find(x => x.id === state.histId);
+  const entry = { id:state.histId, at: old?.at || Date.now(), updated: Date.now(), lang: state.lang, src: state.srcText, results: state.results };
+  writeHist([entry, ...list.filter(x => x.id !== state.histId)]);
+  if (!$("#view-history").hidden) renderHistory();
+}
+function openHistory(id){
+  const e = loadHist().find(x => x.id === id); if (!e) return;
+  if (state.busy) state.ctl?.abort();
+  state.histId = e.id; state.srcText = e.src; state.results = e.results || {};
+  state.lang = e.results?.[e.lang] ? e.lang : (Object.keys(e.results || {})[0] || "ko");
+  state.view = "tr"; state.openRows.clear(); state.sel.clear(); state.practice = null;
+  $("#src").value = e.src; setStatus(""); renderButtons(); render();
+  location.hash = "#analyze"; window.scrollTo({ top:0 });
+}
+function deleteHistory(id){
+  writeHist(loadHist().filter(x => x.id !== id));
+  if (state.histId === id) state.histId = null;
+  renderHistory();
+}
+function fmtWhen(t){
+  const d = new Date(t);
+  return d.toLocaleTimeString("ko-KR", { hour:"numeric", minute:"2-digit" });
+}
+function dayLabel(t){
+  const d = new Date(t), today = new Date(), y = new Date(Date.now() - 864e5);
+  const same = (a,b) => a.toDateString() === b.toDateString();
+  return same(d, today) ? "오늘" : same(d, y) ? "어제" : d.toLocaleDateString("ko-KR", { month:"long", day:"numeric", weekday:"short" });
+}
+function renderHistory(){
+  const el = $("#hList"); const all = loadHist();
+  const q = ($("#hSearch").value || "").trim().toLowerCase();
+  const trOf = e => { const r = e.results?.[e.lang] || Object.values(e.results || {})[0]; return (r?.sentences || []).filter(s => s.tState === "ok").map(s => s.translation).join(" "); };
+  const list = q ? all.filter(e => (e.src + " " + Object.values(e.results || {}).map(r => (r?.sentences||[]).map(s => s.translation).join(" ")).join(" ")).toLowerCase().includes(q)) : all;
+  $("#hTotal").textContent = all.length ? `${all.length}개` : "";
+  if (!histOn() && !all.length){
+    el.innerHTML = `<div class="card"><div class="empty"><span class="em-ic" aria-hidden="true">${SVG_CLOCK}</span><p style="font-size:17px;font-weight:900;color:var(--ink)">번역 기록이 꺼져 있어요</p><p class="hint">설정의 ‘번역 기록’에서 켜면 번역한 글을 다시 볼 수 있어요.</p><a class="btn primary" href="#settings">설정으로 가기</a></div></div>`; return;
+  }
+  if (!all.length){
+    el.innerHTML = `<div class="card"><div class="empty"><span class="em-ic" aria-hidden="true">${SVG_CLOCK}</span><p style="font-size:17px;font-weight:900;color:var(--ink)">아직 번역한 글이 없어요</p><p class="hint">번역하면 여기에 차곡차곡 쌓여요. 다시 열 때는 AI를 다시 부르지 않아서 바로 보여요.</p><a class="btn primary" href="#analyze">번역하러 가기</a></div></div>`; return;
+  }
+  if (!list.length){ el.innerHTML = `<div class="card"><div class="empty"><p>‘${esc(q)}’이(가) 들어간 기록이 없어요.</p></div></div>`; return; }
+  let html = "", lastDay = "";
+  list.forEach(e => {
+    const day = dayLabel(e.at);
+    if (day !== lastDay){ html += `<div class="hday">${esc(day)}</div>`; lastDay = day; }
+    const langs = Object.keys(e.results || {}).filter(k => e.results[k]?.sentences?.length).map(k => `<span class="h-lang">${LANGS[k]?.label || k}</span>`).join("");
+    const n = (e.results?.[e.lang]?.sentences || []).length;
+    html += `<div class="hitem ${e.id === state.histId ? "cur" : ""}">
+      <button class="h-open" data-act="hist-open" data-id="${e.id}">
+        <span class="h-meta">${fmtWhen(e.at)} · ${n}문장 ${langs}</span>
+        <span class="h-vi">${esc(e.src)}</span>
+        <span class="h-tr">${esc(trOf(e))}</span>
+      </button>
+      <button class="icon-btn" data-act="hist-del" data-id="${e.id}" aria-label="이 기록 삭제">${I.del}</button>
+    </div>`;
+  });
+  el.innerHTML = `<div class="hlist">${html}</div>`;
+}
+const SVG_CLOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
 function pickByIndex(arr, k){
   if (!Array.isArray(arr)) return null;
   return arr.find(x => x && +x.i === k + 1) || (arr.length && !arr.some(x => x && "i" in x) ? arr[k] : null);
@@ -775,6 +874,7 @@ async function analyze(){
   if (!text){ setStatus("번역할 문장을 먼저 붙여넣어 주세요.", true); return; }
   if (!getKey()){ $("#keyNote").hidden = false; setStatus("AI 서비스 키가 필요해요.", true); return; }
   const lang = state.lang;
+  if (!(state.histId && state.srcText === text)) state.histId = "h" + Date.now().toString(36) + Math.random().toString(36).slice(2,6);
   state.busy = true; state.ctl = new AbortController(); state.srcText = text;
   state.openRows.clear(); state.sel.clear(); state.practice = null;
   const signal = state.ctl.signal;
@@ -1360,13 +1460,14 @@ function renderThemes(){
 }
 
 /* ---------- 탭 ---------- */
-const TABS = ["analyze","words","review","settings"];
+const TABS = ["analyze","history","words","review","settings"];
 function showTab(){
   let t = location.hash.replace("#",""); if (!TABS.includes(t)) t = "analyze";
   TABS.forEach(x => { $("#view-"+x).hidden = x !== t; });
   document.querySelectorAll("nav.tabs a").forEach(a => a.setAttribute("aria-current", a.dataset.tab === t ? "page" : "false"));
   if (t === "words") renderWords();
   if (t === "review") renderReview();
+  if (t === "history") renderHistory();
 }
 window.addEventListener("hashchange", showTab);
 
@@ -1374,7 +1475,9 @@ window.addEventListener("hashchange", showTab);
 document.addEventListener("click", e => {
   const b = e.target.closest("[data-act]"); if (!b) return;
   const act = b.dataset.act, res = state.results[state.lang];
-  if (act === "hide-voice-note"){ lsSet("doc-vi.voiceNoteHidden", true); $("#voiceNote").hidden = true; }
+  if (act === "hist-open"){ openHistory(b.dataset.id); }
+  else if (act === "hist-del"){ deleteHistory(b.dataset.id); }
+  else if (act === "hide-voice-note"){ lsSet("doc-vi.voiceNoteHidden", true); $("#voiceNote").hidden = true; }
   else if (act === "theme"){ applyTheme(b.dataset.themeId); }
   else if (act === "view"){ state.view = b.dataset.view; render(); }
   else if (act === "play-all"){ speak(res?.sentences.map(s => s.vi).join(" "), b); }
@@ -1421,7 +1524,7 @@ document.addEventListener("change", e => {
   }
 });
 $("#goBtn").addEventListener("click", () => { if (state.busy) state.ctl?.abort(); else analyze(); });
-$("#clearBtn").addEventListener("click", () => { $("#src").value = ""; state.results = {}; state.srcText = ""; state.sel.clear(); state.openRows.clear(); setStatus(""); render(); lsSet(K.last, null); $("#src").focus(); });
+$("#clearBtn").addEventListener("click", () => { $("#src").value = ""; state.results = {}; state.srcText = ""; state.sel.clear(); state.openRows.clear(); state.histId = null; setStatus(""); render(); lsSet(K.last, null); $("#src").focus(); });
 $("#wSearch").addEventListener("input", renderWords);
 $("#langSeg").addEventListener("click", e => {
   const b = e.target.closest("button[data-lang]"); if (!b || state.busy) return;
@@ -1438,19 +1541,23 @@ $("#provider").addEventListener("change", e => { lsSet(K.provider, e.target.valu
 $("#voiceSel").addEventListener("change", e => { lsSet(K.voice, e.target.value); viVoice = viVoices.find(v => v.name === e.target.value) || null; });
 $("#testVoice").addEventListener("click", e => speak("Xin chào, rất vui được gặp anh.", e.currentTarget));
 $("#exportBtn").addEventListener("click", exportWords);
-$("#keepLast").checked = !!lsGet("doc-vi.keepLast");
-$("#keepLast").addEventListener("change", e => {
-  lsSet("doc-vi.keepLast", e.target.checked || null);
-  const res = state.results[state.lang];
-  if (e.target.checked && res?.sentences.length) lsSet(K.last, { lang:state.lang, src:state.srcText, results:state.results });
-  if (!e.target.checked) lsSet(K.last, null);
+$("#histOn").checked = histOn();
+$("#histOn").addEventListener("change", e => {
+  lsSet(HIST.on, e.target.checked ? null : true);
+  $("#histStatus").textContent = e.target.checked ? "이제부터 번역한 글을 기록에 남겨요." : "앞으로는 기록하지 않아요. 이미 남은 기록은 ‘기록 모두 지우기’로 지울 수 있어요.";
+  if (e.target.checked){ if (!state.histId && state.srcText) state.histId = "h" + Date.now().toString(36); persistLast(); }
 });
+$("#histMax").value = String(histMax());
+$("#histMax").addEventListener("change", e => { lsSet(HIST.max, +e.target.value); writeHist(loadHist()); $("#histStatus").textContent = `최근 ${e.target.value}개까지 보관해요.`; });
+$("#histClear").addEventListener("click", () => {
+  if (!confirm("번역 기록을 모두 지울까요? 저장한 단어는 지워지지 않아요.")) return;
+  lsSet(HIST.key, null); state.histId = null; renderHistory(); $("#histStatus").textContent = "번역 기록을 모두 지웠어요.";
+});
+$("#hSearch").addEventListener("input", renderHistory);
 $("#importFile").addEventListener("change", e => { const f = e.target.files?.[0]; if (f) importWords(f); e.target.value = ""; });
 
 /* ---------- 시작 ---------- */
-const last = lsGet("doc-vi.keepLast") ? lsGet(K.last) : null;
-if (!lsGet("doc-vi.keepLast")) lsSet(K.last, null);   // 이전 버전이 남긴 번역 기록 지우기
-if (last && last.src){ $("#src").value = last.src; state.srcText = last.src; state.results = last.results || {}; state.lang = last.lang || "ko"; }
+lsSet(K.last, null); lsSet("doc-vi.keepLast", null);   // 이전 방식(마지막 번역 이어보기) 정리
 const lw = lsGet(K.words); if (lw) Object.entries(lw).forEach(([id,w]) => state.words.set(id, w));
 renderProvider(); renderThemes(); renderSyncUI(); renderHello(); render(); showTab(); updateDue();
 if (gistToken()) syncNow();
