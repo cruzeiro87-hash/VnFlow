@@ -239,7 +239,7 @@ h2.h{font-size:16px;font-weight:700;margin:0 0 8px}
   <section id="view-words" hidden>
     <div class="toolbar">
       <input id="wSearch" type="search" placeholder="단어나 뜻으로 찾기" aria-label="단어장 검색">
-      <span class="hint" id="wTotal"></span>
+      <span class="hint" id="wTotal"></span><span class="hint" id="wSync"></span>
     </div>
     <div id="wList"></div>
   </section>
@@ -283,7 +283,25 @@ h2.h{font-size:16px;font-weight:700;margin:0 0 8px}
       <div class="note" id="voiceHelp"></div>
     </div>
     <div class="card pad">
-      <h2 class="h">단어장 옮기기</h2>
+      <h2 class="h">단어장 자동 연동 (GitHub)</h2>
+      <p class="hint" style="margin:0">GitHub 계정의 비공개 Gist에 단어장을 저장해서, 폰과 PC가 같은 단어장을 써요. 기기마다 한 번씩 토큰을 넣어 주세요.</p>
+      <ol class="steps">
+        <li><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">새 토큰 만들기</a> 화면을 열고 이름을 적어요.</li>
+        <li>권한(Permissions)에서 <b>Gists</b>를 찾아 <b>Read and write</b>로 정해요. GitHub Models도 같이 쓰려면 <b>Models</b>를 Read-only로 함께 추가하세요.</li>
+        <li>토큰을 생성해 복사한 뒤 아래에 붙여넣고 ‘연동 시작’을 눌러요.</li>
+      </ol>
+      <div class="field"><label for="gistToken">GitHub 토큰</label><input id="gistToken" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…"></div>
+      <div class="row">
+        <button class="btn primary" id="gistStart">연동 시작</button>
+        <button class="btn" id="gistUseModels" hidden>GitHub Models 토큰 그대로 쓰기</button>
+        <button class="btn" id="gistNow" hidden>지금 동기화</button>
+        <button class="btn ghost" id="gistStop" hidden>연동 해제</button>
+      </div>
+      <div class="status" id="gistStatus" role="status" aria-live="polite"></div>
+      <div class="note">Gist는 ‘비공개 링크’ 방식이라 검색이나 목록에는 나오지 않지만, 주소를 아는 사람은 볼 수 있어요. 단어와 예문만 저장돼요.</div>
+    </div>
+    <div class="card pad">
+      <h2 class="h">단어장 파일로 옮기기</h2>
       <p class="hint" style="margin:0">폰과 PC의 단어장을 맞추려면 한쪽에서 내보낸 파일을 다른 쪽에서 가져오세요. 같은 단어는 더 최근에 수정한 쪽이 남아요.</p>
       <div class="row">
         <button class="btn" id="exportBtn">단어장 내보내기</button>
@@ -370,7 +388,7 @@ const PROVIDERS = {
   },
   github: {
     label:"GitHub Models", keyPh:"github_pat_…", json:true,
-    steps:['GitHub에 로그인한 뒤 <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">새 토큰 만들기</a> 화면을 열어요.','이름을 적고, Permissions에서 ‘Models’를 Read-only로 선택한 뒤 토큰을 생성해요.','생성된 토큰을 복사해 아래에 붙여넣고 ‘연결 확인’을 눌러요.'],
+    steps:['GitHub에 로그인한 뒤 <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">새 토큰 만들기</a> 화면을 열어요.','이름을 적고, 권한(Permissions)에서 ‘Models’를 Read-only로 추가해요. 단어장 자동 연동도 쓰려면 ‘Gists’를 Read and write로 함께 추가하세요.','생성된 토큰을 복사해 아래에 붙여넣고 ‘연결 확인’을 눌러요.'],
     privacy:"GitHub Models 무료 사용은 하루 요청 수 한도가 있어요. 업무 메일 내용을 넣어도 되는지는 회사 정책을 확인해 주세요.",
     defaultModel:"openai/gpt-4.1-mini",
     async list(){ const j = await getJSON("https://models.github.ai/catalog/models");
@@ -673,7 +691,8 @@ function wordId(word){
   for (let i=0;i<s.length;i++){ const c=s.charCodeAt(i); h1 = Math.imul(h1 ^ c, 16777619); h2 = Math.imul(h2 + c, 2654435761); }
   return "w" + (h1>>>0).toString(16) + (h2>>>0).toString(16);
 }
-function saveWords(){ lsSet(K.words, Object.fromEntries(state.words)); }
+function saveWords(fromSync){ lsSet(K.words, Object.fromEntries(state.words)); if (!fromSync) scheduleSync(); }
+function deleteWord(id){ state.words.delete(id); tombs[id] = Date.now(); lsSet(SYNC.tomb, tombs); saveWords(); afterWordsChange(); }
 function saveSelected(){
   const words = collectWords(state.results[state.lang]);
   let n = 0; const now = Date.now();
@@ -825,6 +844,114 @@ async function checkKey(){
 
 
 
+/* ---------- GitHub Gist 자동 연동 ---------- */
+const SYNC = { token:"doc-vi.gist.token", id:"doc-vi.gist.id", last:"doc-vi.gist.last", tomb:"doc-vi.tombs", file:"vnflow-words.json", desc:"VnFlow 단어장 (자동 동기화)" };
+let tombs = lsGet(SYNC.tomb) || {};
+let syncTimer = null, syncing = false, syncAgain = false;
+const gistToken = () => lsGet(SYNC.token) || "";
+async function gh(path, opts = {}, token = gistToken()){
+  const r = await fetch("https://api.github.com" + path, { ...opts, cache:"no-store", headers:{
+    Accept:"application/vnd.github+json", Authorization:"Bearer " + token, ...(opts.body ? { "Content-Type":"application/json" } : {}) } });
+  if (!r.ok) throw await apiError(r);
+  return r.status === 204 ? null : r.json();
+}
+const wts = w => w?.updated || w?.added || 0;
+function canon(v){ if (Array.isArray(v)) return v.map(canon); if (v && typeof v === "object") return Object.keys(v).sort().reduce((o,k) => (o[k] = canon(v[k]), o), {}); return v; }
+function core(){
+  const cut = Date.now() - 120 * 864e5;                 // 120일 지난 삭제 기록은 정리
+  for (const [id,t] of Object.entries(tombs)) if (t < cut) delete tombs[id];
+  return { words:Object.fromEntries(state.words), deleted:{ ...tombs } };
+}
+function mergeRemote(remote){
+  let changed = false;
+  for (const [id,t] of Object.entries(remote?.deleted || {})) if (!tombs[id] || tombs[id] < t) tombs[id] = t;
+  for (const [id,w] of Object.entries(remote?.words || {})){
+    if (!w || !w.word) continue;
+    const cur = state.words.get(id);
+    if ((!cur || wts(w) > wts(cur)) && !(tombs[id] >= wts(w))){ state.words.set(id, w); changed = true; }
+  }
+  for (const [id,t] of Object.entries(tombs)){ const cur = state.words.get(id); if (cur && t >= wts(cur)){ state.words.delete(id); changed = true; } }
+  return changed;
+}
+async function findOrCreateGist(token){
+  for (let page = 1; page <= 3; page++){
+    const list = await gh(`/gists?per_page=100&page=${page}`, {}, token);
+    const g = (list || []).find(x => x.files && x.files[SYNC.file]);
+    if (g) return g.id;
+    if (!list || list.length < 100) break;
+  }
+  const g = await gh("/gists", { method:"POST", body: JSON.stringify({ description:SYNC.desc, public:false,
+    files:{ [SYNC.file]:{ content: JSON.stringify({ app:"vnflow", version:3, ...core() }) } } }) }, token);
+  return g.id;
+}
+function setSyncStatus(msg, err){
+  const st = $("#gistStatus"); st.textContent = msg || ""; st.classList.toggle("err", !!err);
+  const last = lsGet(SYNC.last);
+  $("#wSync").textContent = !gistToken() ? "" : err ? " · 동기화 오류" :
+    last ? ` · ${new Date(last).toLocaleTimeString("ko-KR",{hour:"2-digit",minute:"2-digit"})} 동기화됨` : "";
+}
+function syncErr(e){
+  if (e?.status === 401) return "토큰이 맞지 않거나 만료됐어요. 새 토큰을 넣어 주세요.";
+  if (e?.status === 403 || e?.status === 404) return "토큰에 Gists 권한이 없어요. 토큰 설정에서 Gists를 Read and write로 추가해 주세요.";
+  if (e?.status === 422) return "GitHub이 저장을 거절했어요. 잠시 후 ‘지금 동기화’를 눌러 주세요.";
+  return navigator.onLine === false ? "인터넷이 연결되면 자동으로 동기화할게요." : "GitHub에 연결하지 못했어요. 잠시 후 다시 시도해 주세요.";
+}
+async function syncNow(){
+  if (!gistToken()) return;
+  if (syncing){ syncAgain = true; return; }
+  syncing = true; setSyncStatus("동기화 중…");
+  try{
+    let id = lsGet(SYNC.id);
+    if (!id){ id = await findOrCreateGist(gistToken()); lsSet(SYNC.id, id); }
+    let g;
+    try{ g = await gh(`/gists/${id}`); }
+    catch(e){ if (e.status !== 404) throw e; id = await findOrCreateGist(gistToken()); lsSet(SYNC.id, id); g = await gh(`/gists/${id}`); }
+    const f = g.files?.[SYNC.file];
+    let content = f?.content || "";
+    if (f?.truncated && f.raw_url) content = await (await fetch(f.raw_url, { cache:"no-store" })).text();
+    let remote = {}; try{ remote = JSON.parse(content || "{}"); }catch{}
+    const changed = mergeRemote(remote);
+    lsSet(SYNC.tomb, tombs); saveWords(true);
+    const local = core();
+    if (JSON.stringify(canon(local)) !== JSON.stringify(canon({ words:remote.words || {}, deleted:remote.deleted || {} }))){
+      await gh(`/gists/${id}`, { method:"PATCH", body: JSON.stringify({ files:{ [SYNC.file]:{ content: JSON.stringify({ app:"vnflow", version:3, ...local }) } } }) });
+    }
+    if (changed) afterWordsChange();
+    lsSet(SYNC.last, Date.now());
+    setSyncStatus(`연동 중이에요. 단어 ${state.words.size}개가 GitHub에 저장돼 있어요.`);
+  }catch(e){ console.warn(e); setSyncStatus(syncErr(e), true); }
+  finally{ syncing = false; if (syncAgain){ syncAgain = false; scheduleSync(); } }
+}
+function scheduleSync(){ if (!gistToken()) return; clearTimeout(syncTimer); syncTimer = setTimeout(syncNow, 2000); }
+async function startSync(token){
+  token = (token || "").trim();
+  if (!token){ setSyncStatus("GitHub 토큰을 붙여넣어 주세요.", true); return; }
+  setSyncStatus("GitHub에 연결하는 중…");
+  try{
+    const id = await findOrCreateGist(token);
+    lsSet(SYNC.token, token); lsSet(SYNC.id, id);
+    renderSyncUI(); await syncNow();
+  }catch(e){ console.warn(e); setSyncStatus(syncErr(e), true); }
+}
+function stopSync(){
+  clearTimeout(syncTimer); lsSet(SYNC.token, null); lsSet(SYNC.id, null); lsSet(SYNC.last, null);
+  renderSyncUI(); setSyncStatus("이 기기의 연동을 해제했어요. 단어장은 이 기기와 GitHub 양쪽에 그대로 남아 있어요.");
+}
+function renderSyncUI(){
+  const on = !!gistToken();
+  $("#gistToken").value = on ? gistToken() : $("#gistToken").value;
+  $("#gistStart").textContent = on ? "토큰 바꾸기" : "연동 시작";
+  $("#gistNow").hidden = !on; $("#gistStop").hidden = !on;
+  $("#gistUseModels").hidden = on || !lsGet("doc-vi.key.github");
+  setSyncStatus(on ? "연동 중이에요." : "");
+}
+$("#gistStart").addEventListener("click", () => startSync($("#gistToken").value));
+$("#gistUseModels").addEventListener("click", () => { $("#gistToken").value = lsGet("doc-vi.key.github") || ""; startSync($("#gistToken").value); });
+$("#gistNow").addEventListener("click", syncNow);
+$("#gistStop").addEventListener("click", stopSync);
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && Date.now() - (lsGet(SYNC.last) || 0) > 20000) syncNow(); });
+window.addEventListener("online", scheduleSync);
+
 /* ---------- 테마 ---------- */
 const THEMES = [
   { id:"auto", name:"자동" }, { id:"light", name:"라이트" }, { id:"dark", name:"다크" },
@@ -873,10 +1000,10 @@ document.addEventListener("click", e => {
   }
   else if (act === "toggle"){ const i = +b.dataset.si; state.openRows.has(i) ? state.openRows.delete(i) : state.openRows.add(i); render(); }
   else if (act === "save-sel"){ saveSelected(); }
-  else if (act === "del"){ state.words.delete(b.dataset.id); saveWords(); afterWordsChange(); }
+  else if (act === "del"){ deleteWord(b.dataset.id); }
   else if (act === "flip"){ rv.flipped = true; renderReview(); }
   else if (act === "grade"){ grade(b.dataset.ok === "1"); }
-  else if (act === "review-all"){ const now = Date.now(); for (const [id,w] of state.words) state.words.set(id, { ...w, due:now }); saveWords(); afterWordsChange(); }
+  else if (act === "review-all"){ const now = Date.now(); for (const [id,w] of state.words) state.words.set(id, { ...w, due:now, updated:now }); saveWords(); afterWordsChange(); }
 });
 document.addEventListener("change", e => {
   const b = e.target.closest("[data-act]"); if (!b) return;
@@ -910,7 +1037,8 @@ $("#importFile").addEventListener("change", e => { const f = e.target.files?.[0]
 const last = lsGet(K.last);
 if (last && last.src){ $("#src").value = last.src; state.srcText = last.src; state.results = last.results || {}; state.lang = last.lang || "ko"; }
 const lw = lsGet(K.words); if (lw) Object.entries(lw).forEach(([id,w]) => state.words.set(id, w));
-renderProvider(); renderThemes(); render(); showTab(); updateDue();
+renderProvider(); renderThemes(); renderSyncUI(); render(); showTab(); updateDue();
+if (gistToken()) syncNow();
 if (!getKey() && !location.hash) location.hash = "#settings";
 })();
 </script>
