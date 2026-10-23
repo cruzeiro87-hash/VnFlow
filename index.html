@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Đọc · 베트남어 번역 노트</title>
+<script>try{var t=JSON.parse(localStorage.getItem("doc-vi.theme")||"null");if(t&&t!=="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F3F5F4; --surface:#FFFFFF; --surface-2:#F0F3F2; --ink:#14201D; --ink-2:#4B5955; --ink-3:#7E8B87;
+  --line:#DCE2DF; --line-2:#C5CEca; --accent:#0E6B5C; --accent-ink:#FFFFFF; --accent-soft:#E1F0EB; --danger:#A3152F;
+  --font-vi:"Be Vietnam Pro","Segoe UI",Roboto,system-ui,sans-serif;
+  --font-ui:"Be Vietnam Pro","Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo","Microsoft YaHei","PingFang SC",system-ui,sans-serif;
+  --font-tr:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo","Microsoft YaHei","PingFang SC","Noto Sans SC",system-ui,sans-serif;
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+/* 테마: 자동(기기 설정 따름) · 라이트 · 다크 · 종이 · 밤바다 · 고대비 · 고대비 다크 */
+@media (prefers-color-scheme: dark){ :root:not([data-theme]), :root[data-theme="auto"]{ --bg:#101614; --surface:#171E1C; --surface-2:#1D2623; --ink:#E7EEEB; --ink-2:#A8B6B1; --ink-3:#77857F; --line:#29332F; --line-2:#3A4641; --accent:#5EC4A8; --accent-ink:#062A22; --accent-soft:#1A3530; --danger:#FF8A9C; color-scheme:dark; } }
+[data-theme="light"]{ --bg:#F3F5F4; --surface:#FFFFFF; --surface-2:#F0F3F2; --ink:#14201D; --ink-2:#4B5955; --ink-3:#7E8B87; --line:#DCE2DF; --line-2:#C5CEca; --accent:#0E6B5C; --accent-ink:#FFFFFF; --accent-soft:#E1F0EB; --danger:#A3152F; color-scheme:light; }
+[data-theme="dark"]{ --bg:#101614; --surface:#171E1C; --surface-2:#1D2623; --ink:#E7EEEB; --ink-2:#A8B6B1; --ink-3:#77857F; --line:#29332F; --line-2:#3A4641; --accent:#5EC4A8; --accent-ink:#062A22; --accent-soft:#1A3530; --danger:#FF8A9C; color-scheme:dark; }
+[data-theme="paper"]{ --bg:#F1E9DA; --surface:#FBF6EC; --surface-2:#EFE5D3; --ink:#2B2118; --ink-2:#5C4E40; --ink-3:#8A7A68; --line:#E2D6C2; --line-2:#CDBEA6; --accent:#8A4F1D; --accent-ink:#FFFFFF; --accent-soft:#F1E0C6; --danger:#A3152F; color-scheme:light; }
+[data-theme="night"]{ --bg:#0D1424; --surface:#141D31; --surface-2:#1B2640; --ink:#E6ECF7; --ink-2:#A6B3CC; --ink-3:#72809B; --line:#26324D; --line-2:#35435F; --accent:#7FB2FF; --accent-ink:#0A1A33; --accent-soft:#1D2E4F; --danger:#FF8A9C; color-scheme:dark; }
+[data-theme="contrast"]{ --bg:#FFFFFF; --surface:#FFFFFF; --surface-2:#EFEFEF; --ink:#000000; --ink-2:#1A1A1A; --ink-3:#3D3D3D; --line:#767676; --line-2:#000000; --accent:#0038B8; --accent-ink:#FFFFFF; --accent-soft:#DCE5FF; --danger:#B00020; color-scheme:light; }
+[data-theme="contrast-dark"]{ --bg:#000000; --surface:#000000; --surface-2:#161616; --ink:#FFFFFF; --ink-2:#F0F0F0; --ink-3:#C8C8C8; --line:#8A8A8A; --line-2:#FFFFFF; --accent:#FFD400; --accent-ink:#000000; --accent-soft:#2E2700; --danger:#FF8A9C; color-scheme:dark; }
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-ui);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+button,textarea,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.top-in{max-width:820px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:10px 16px}
+.brand{display:flex;align-items:baseline;gap:8px;margin-right:auto;min-width:0}
+.brand b{font-family:var(--font-vi);font-weight:700;font-size:23px;letter-spacing:-.02em}
+.brand span{font-size:13px;color:var(--ink-3);white-space:nowrap}
+nav.tabs{display:flex;gap:2px}
+nav.tabs a{padding:7px 11px;border-radius:9px;text-decoration:none;color:var(--ink-2);font-size:14px;font-weight:500;white-space:nowrap;position:relative}
+nav.tabs a[aria-current="page"]{color:var(--ink);font-weight:700;background:var(--surface-2)}
+nav.tabs .count{display:inline-block;min-width:18px;padding:0 5px;margin-left:4px;border-radius:9px;background:var(--accent);color:var(--accent-ink);font-size:11px;line-height:18px;text-align:center}
+
+main{max-width:820px;margin:0 auto;padding:18px 16px 64px}
+section[hidden],nav.tabs .count[hidden]{display:none}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px}
+.card + .card{margin-top:14px}
+.pad{padding:16px}
+.hint{font-size:13px;color:var(--ink-3)}
+.status{font-size:14px;color:var(--ink-2);margin-top:10px}
+.status:empty{display:none}
+.status.err{color:var(--danger);font-weight:500}
+.note{margin-top:12px;font-size:13px;color:var(--ink-2);background:var(--surface-2);border-radius:10px;padding:10px 12px}
+
+/* 버튼 */
+.btn{border:1px solid var(--line-2);background:var(--surface);border-radius:10px;padding:8px 14px;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;color:var(--ink)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700}
+.btn.ghost{border-color:transparent;background:transparent;color:var(--ink-2)}
+.btn:disabled{opacity:.45;cursor:default}
+.btn svg,.icon-btn svg{width:18px;height:18px;flex:none}
+.icon-btn{width:38px;height:38px;border-radius:50%;border:0;background:transparent;display:inline-grid;place-items:center;padding:0;flex:none;color:var(--ink-2)}
+.icon-btn:hover{background:var(--surface-2)}
+.icon-btn.on{background:var(--accent-soft);color:var(--accent)}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.spacer{flex:1}
+
+/* 입력 */
+.input-card textarea{display:block;width:100%;min-height:140px;resize:vertical;border:0;background:transparent;padding:16px 16px 8px;font-family:var(--font-vi);font-size:18px;line-height:1.6;outline:none}
+.input-card textarea::placeholder{color:var(--ink-3)}
+.input-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 12px 12px;border-top:1px solid var(--line)}
+.lang-pick{display:flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-2)}
+.seg{display:inline-flex;background:var(--surface-2);border-radius:10px;padding:3px}
+.seg button{border:0;background:transparent;padding:6px 12px;font-size:14px;color:var(--ink-2);border-radius:8px}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);font-weight:700;box-shadow:0 0 0 1px var(--line-2)}
+.input-card .status, .input-card .note{margin:0 16px 14px}
+
+/* 결과 */
+.res-head{display:flex;align-items:center;gap:6px;padding:10px 12px 0 16px;flex-wrap:wrap}
+.res-tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);padding:0 12px;margin-top:6px;overflow-x:auto}
+.res-tabs button{border:0;background:transparent;padding:10px 12px;font-size:15px;color:var(--ink-2);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.res-tabs button[aria-selected="true"]{color:var(--ink);font-weight:700;border-bottom-color:var(--ink)}
+.res-tabs .n{font-size:12px;color:var(--ink-3);margin-left:4px;font-weight:500}
+.res-body{padding:16px}
+
+.translation p{margin:0 0 14px;font-family:var(--font-tr);font-size:18px;line-height:1.85}
+.translation p:last-child{margin-bottom:0}
+.lang-tag{font-size:13px;color:var(--ink-3);font-weight:500}
+
+/* 문장 학습 */
+.slist{display:flex;flex-direction:column}
+.srow{border-top:1px solid var(--line);padding:14px 0}
+.srow:first-child{border-top:0;padding-top:0}
+.s-main{display:grid;grid-template-columns:28px 1fr auto;gap:2px 8px;align-items:start}
+.s-num{font-size:13px;color:var(--ink-3);padding-top:3px;font-variant-numeric:tabular-nums}
+.s-vi{font-family:var(--font-vi);font-size:18px;line-height:1.55}
+.s-tr{grid-column:2;font-family:var(--font-tr);font-size:15px;color:var(--ink-2);line-height:1.65;margin-top:2px}
+.s-acts{display:flex;gap:2px;grid-row:1 / span 2;grid-column:3}
+.s-toggle{grid-column:2;justify-self:start;margin-top:8px;border:0;background:transparent;padding:4px 0;font-size:14px;color:var(--accent);font-weight:600;display:inline-flex;align-items:center;gap:4px}
+.s-toggle svg{width:16px;height:16px;transition:transform .15s}
+.s-toggle[aria-expanded="true"] svg{transform:rotate(180deg)}
+.s-detail{margin:10px 0 0 36px;background:var(--surface-2);border-radius:12px;padding:14px}
+
+/* 행간 해설: 위=성분 이름, 가운데=베트남어, 아래=뜻 */
+.clause + .clause{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line-2)}
+.il-row{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-start}
+.il{display:flex;flex-direction:column;align-items:flex-start;border:0;background:transparent;padding:0;text-align:left;max-width:100%}
+.il .tag{font-size:11px;font-weight:600;color:var(--ink-3);line-height:1.3;margin-bottom:2px}
+.il .v{font-family:var(--font-vi);font-size:18px;line-height:1.35;padding-bottom:3px;border-bottom:1px solid var(--line-2)}
+.il .g{font-family:var(--font-tr);font-size:13px;color:var(--ink-2);margin-top:3px}
+.il.core .tag{color:var(--ink)}
+.il.pred .v{font-weight:600;border-bottom:3px solid var(--ink)}
+.il.subj .v{border-bottom:2px solid var(--ink)}
+.il.obj .v{border-bottom:3px double var(--ink)}
+.il.minor .v{color:var(--ink-2);font-style:italic;border-bottom-color:transparent}
+.il:hover .v{color:var(--accent)}
+.key{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:12px;font-size:12px;color:var(--ink-3)}
+.key span{display:inline-flex;align-items:center;gap:6px}
+.key i{display:inline-block;width:20px}
+.key .k-pred{border-bottom:3px solid var(--ink-2)}
+.key .k-subj{border-bottom:2px solid var(--ink-2)}
+.key .k-obj{border-bottom:3px double var(--ink-2)}
+.tips{margin-top:14px;padding-top:12px;border-top:1px solid var(--line-2)}
+.tips h4{margin:0 0 6px;font-size:13px;color:var(--ink-2)}
+.tips ul{margin:0;padding-left:18px}
+.tips li{font-family:var(--font-tr);font-size:14px;color:var(--ink);margin-top:3px}
+
+/* 단어 목록 (결과 안) */
+.w-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.chk{display:inline-flex;align-items:center;gap:8px;font-size:14px;cursor:pointer}
+.chk input{width:20px;height:20px;accent-color:var(--accent);margin:0}
+.wrow{display:grid;grid-template-columns:28px 1fr auto;gap:0 10px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.wrow:first-of-type{border-top:0}
+.wrow input{width:20px;height:20px;accent-color:var(--accent);margin:0}
+.w-word{font-family:var(--font-vi);font-size:18px;font-weight:600}
+.w-pron{font-size:13px;color:var(--ink-3);font-weight:400;margin-left:6px}
+.w-mean{font-family:var(--font-tr);font-size:15px;color:var(--ink)}
+.w-meta{font-family:var(--font-tr);font-size:13px;color:var(--ink-3)}
+.w-right{display:flex;align-items:center;gap:4px}
+.badge{font-size:12px;color:var(--accent);font-weight:600;white-space:nowrap}
+.sticky-save{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);display:flex;justify-content:center;margin-top:12px;pointer-events:none}
+.sticky-save .btn{pointer-events:auto;padding:12px 22px;font-size:15px;border-radius:999px;box-shadow:0 4px 16px rgba(0,0,0,.18)}
+
+/* 단어장 */
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.toolbar input[type=search]{flex:1;min-width:160px;border:1px solid var(--line-2);border-radius:10px;padding:9px 12px;background:var(--surface)}
+.wlist{padding:4px 16px}
+.witem{display:grid;grid-template-columns:auto 1fr auto;gap:2px 10px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.witem:first-child{border-top:0}
+.wi-main{min-width:0}
+.wi-ex{font-size:13px;color:var(--ink-3);font-family:var(--font-vi);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wi-box{font-size:12px;color:var(--ink-3);white-space:nowrap}
+.empty{padding:36px 16px;text-align:center;color:var(--ink-2)}
+.empty p{margin:0 0 12px}
+
+/* 복습 */
+.flash{padding:32px 20px;text-align:center;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.flash .cw{font-family:var(--font-vi);font-size:40px;font-weight:600;line-height:1.2}
+.flash .cp{color:var(--ink-2)}
+.flash .cm{font-family:var(--font-tr);font-size:20px}
+.flash .ch{font-family:var(--font-tr);color:var(--ink-2)}
+.flash .ce{font-family:var(--font-vi);font-size:14px;color:var(--ink-3);max-width:46ch}
+.flash .ct{font-family:var(--font-tr);font-size:13px;color:var(--ink-3);max-width:46ch}
+.review-meta{display:flex;justify-content:space-between;font-size:13px;color:var(--ink-2);margin-bottom:10px}
+.review-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.review-actions .btn{justify-content:center;padding:12px;font-size:15px}
+
+/* 설정 */
+h2.h{font-size:16px;font-weight:700;margin:0 0 8px}
+.field{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.field label{font-size:14px;font-weight:600}
+.field input,.field select{border:1px solid var(--line-2);border-radius:10px;padding:9px 12px;background:var(--bg);width:100%}
+.steps{margin:6px 0 0;padding-left:20px;font-size:14px;color:var(--ink-2)}
+.steps li{margin-top:4px}
+.settings .row{margin-top:12px}
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:10px;margin-top:10px}
+.theme-opt{border:2px solid var(--line-2);border-radius:12px;padding:0;overflow:hidden;text-align:left;background:var(--surface)}
+.theme-opt[aria-checked="true"]{border-color:var(--ink);box-shadow:0 0 0 2px var(--accent)}
+.theme-opt .pv{display:block;background:var(--bg);color:var(--ink);padding:10px 10px 8px;border-bottom:1px solid var(--line)}
+.theme-opt .pv .s{display:block;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:4px 6px;font-family:var(--font-vi);font-size:13px}
+.theme-opt .pv .a{display:inline-block;margin-top:6px;height:6px;width:40px;border-radius:3px;background:var(--accent)}
+.theme-opt .nm{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;font-size:13px;font-weight:600;background:var(--surface);color:var(--ink)}
+.theme-opt[aria-checked="true"] .nm::after{content:"✓"}
+.theme-opt.auto .pv{background:linear-gradient(135deg,#F3F5F4 50%,#101614 50%)}
+.theme-opt.auto .pv .s{background:#FFFFFF;color:#14201D;border-color:#DCE2DF}
+
+@media (max-width:560px){
+  .brand span{display:none}
+  nav.tabs a{padding:6px 8px;font-size:13px}
+  .s-detail{margin-left:0}
+  .s-vi{font-size:17px}
+  .translation p{font-size:17px}
+}
+@media (prefers-reduced-motion:reduce){ .s-toggle svg{transition:none} }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <div class="brand"><b>Đọc</b><span>베트남어 번역 노트</span></div>
+    <nav class="tabs" aria-label="화면">
+      <a href="#analyze" data-tab="analyze">번역</a>
+      <a href="#words" data-tab="words">단어장</a>
+      <a href="#review" data-tab="review">복습<span class="count" id="dueCount" hidden>0</span></a>
+      <a href="#settings" data-tab="settings">설정</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- 번역 -->
+  <section id="view-analyze">
+    <div class="card input-card">
+      <textarea id="src" spellcheck="false" aria-label="베트남어 원문" placeholder="베트남어 메일이나 문장을 붙여넣으세요"></textarea>
+      <div class="input-bar">
+        <div class="lang-pick"><span>베트남어 →</span>
+          <div class="seg" role="group" aria-label="번역할 언어" id="langSeg">
+            <button data-lang="ko" aria-pressed="true">한국어</button>
+            <button data-lang="en" aria-pressed="false">English</button>
+            <button data-lang="zh" aria-pressed="false">中文</button>
+          </div>
+        </div>
+        <span class="spacer"></span>
+        <button class="btn ghost" id="clearBtn">지우기</button>
+        <button class="btn primary" id="goBtn">번역하기</button>
+      </div>
+      <div class="status" id="status" role="status" aria-live="polite"></div>
+      <div class="note" id="keyNote" hidden>먼저 <a href="#settings">설정</a>에서 무료 AI 서비스 키를 입력해 주세요. 1~2분이면 받을 수 있어요.</div>
+      <div class="note" id="voiceNote" hidden></div>
+    </div>
+    <div id="result"></div>
+  </section>
+
+  <!-- 단어장 -->
+  <section id="view-words" hidden>
+    <div class="toolbar">
+      <input id="wSearch" type="search" placeholder="단어나 뜻으로 찾기" aria-label="단어장 검색">
+      <span class="hint" id="wTotal"></span>
+    </div>
+    <div id="wList"></div>
+  </section>
+
+  <!-- 복습 -->
+  <section id="view-review" hidden><div id="reviewBox"></div></section>
+
+  <!-- 설정 -->
+  <section id="view-settings" class="settings" hidden>
+    <div class="card pad">
+      <h2 class="h">AI 연결 (무료)</h2>
+      <div class="field">
+        <label for="provider">AI 서비스</label>
+        <select id="provider">
+          <option value="groq">Groq · 빠름 (추천)</option>
+          <option value="github">GitHub Models · 번역 품질 좋음</option>
+          <option value="openrouter">OpenRouter · 무료 모델 여러 개</option>
+          <option value="gemini">Google Gemini</option>
+        </select>
+      </div>
+      <ol class="steps" id="keySteps"></ol>
+      <div class="field"><label for="apiKey">API 키</label><input id="apiKey" type="password" autocomplete="off" spellcheck="false"></div>
+      <div class="field">
+        <label for="model">분석 모델</label>
+        <select id="model"></select>
+        <span class="hint">‘연결 확인’을 누르면 쓸 수 있는 모델 목록을 불러와요.</span>
+      </div>
+      <div class="row"><button class="btn primary" id="saveKey">연결 확인</button><button class="btn" id="forgetKey">키 지우기</button></div>
+      <div class="status" id="keyStatus" role="status" aria-live="polite"></div>
+      <div class="note" id="privacyNote"></div>
+    </div>
+    <div class="card pad">
+      <h2 class="h">화면 테마</h2>
+      <p class="hint" style="margin:0">고른 테마는 이 기기에 저장돼요. 고대비 테마는 글자와 경계선을 가장 또렷하게 보여줘요.</p>
+      <div class="themes" role="radiogroup" aria-label="화면 테마" id="themeList"></div>
+    </div>
+    <div class="card pad">
+      <h2 class="h">발음</h2>
+      <div class="field"><label for="voiceSel">베트남어 음성</label><select id="voiceSel"></select></div>
+      <div class="row"><button class="btn" id="testVoice">음성 테스트: “Xin chào, rất vui được gặp anh.”</button></div>
+      <div class="note" id="voiceHelp"></div>
+    </div>
+    <div class="card pad">
+      <h2 class="h">단어장 옮기기</h2>
+      <p class="hint" style="margin:0">폰과 PC의 단어장을 맞추려면 한쪽에서 내보낸 파일을 다른 쪽에서 가져오세요. 같은 단어는 더 최근에 수정한 쪽이 남아요.</p>
+      <div class="row">
+        <button class="btn" id="exportBtn">단어장 내보내기</button>
+        <label class="btn" for="importFile" style="cursor:pointer">단어장 가져오기</label>
+        <input id="importFile" type="file" accept=".json,application/json" hidden>
+      </div>
+      <div class="status" id="ioStatus" role="status" aria-live="polite"></div>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+"use strict";
+
+const ROLES = {
+  subject:"주어", predicate:"서술어", object:"목적어", complement:"보어",
+  adverbial:"부사어", modifier:"꾸밈말", connector:"연결어", particle:"어감", other:""
+};
+const LANGS = {
+  ko:{ name:"Korean (한국어)", label:"한국어" },
+  en:{ name:"English", label:"English" },
+  zh:{ name:"Simplified Chinese (简体中文)", label:"中文" }
+};
+const BOX_DAYS = [0, 0, 1, 3, 7, 16];
+const K = { words:"doc-vi.words.v2", last:"doc-vi.last.v3", provider:"doc-vi.provider", voice:"doc-vi.voice" };
+
+const state = { lang:"ko", srcText:"", results:{}, words:new Map(), view:"tr", openRows:new Set(), sel:new Set(), slow:false, busy:false, ctl:null };
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function lsGet(k){ try{ const v = localStorage.getItem(k); return v == null ? null : JSON.parse(v); }catch{ return null; } }
+function lsSet(k,v){ try{ v == null ? localStorage.removeItem(k) : localStorage.setItem(k, JSON.stringify(v)); }catch{} }
+
+const I = {
+  play:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>',
+  slow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/><path d="M9 2h6"/></svg>',
+  copy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>',
+  down:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>',
+  del:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>'
+};
+
+/* ---------- 발음 ---------- */
+let viVoices = [], viVoice = null;
+function loadVoices(){
+  if (!("speechSynthesis" in window)) { voiceHelp(); return; }
+  viVoices = speechSynthesis.getVoices().filter(v => /^vi/i.test(v.lang));
+  viVoices.sort((a,b) => vscore(b) - vscore(a));
+  const saved = lsGet(K.voice);
+  viVoice = viVoices.find(v => v.name === saved) || viVoices[0] || null;
+  $("#voiceSel").innerHTML = viVoices.length
+    ? viVoices.map(v => `<option value="${esc(v.name)}" ${v===viVoice?"selected":""}>${esc(v.name)}</option>`).join("")
+    : `<option value="">기본 음성 (베트남어 음성 없음)</option>`;
+  voiceHelp();
+}
+function vscore(v){ let s=0; if(/natural|online|neural/i.test(v.name)) s+=3; if(/google/i.test(v.name)) s+=2; if(v.localService) s+=1; return s; }
+function voiceHelp(){
+  const msg = !("speechSynthesis" in window) ? "이 브라우저는 음성 재생을 지원하지 않아요. 크롬이나 Edge에서 열어 주세요."
+    : viVoice ? "" : "베트남어 음성을 찾지 못했어요. 윈도우에서는 Edge 브라우저로 열면 바로 들을 수 있어요(크롬이라면 윈도우 설정 › 시간 및 언어 › 음성에서 베트남어 음성 추가). 안드로이드는 설정 › 텍스트 음성 변환 › Google 음성 엔진에서 베트남어 데이터를 설치하세요.";
+  $("#voiceHelp").textContent = msg || "베트남어 음성이 준비돼 있어요.";
+  $("#voiceNote").hidden = !msg; $("#voiceNote").textContent = msg;
+}
+function speak(text, btn){
+  if (!("speechSynthesis" in window) || !text) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "vi-VN"; if (viVoice) u.voice = viVoice;
+  u.rate = state.slow ? 0.6 : 0.95;
+  if (btn){ btn.classList.add("on"); u.onend = u.onerror = () => btn.classList.remove("on"); }
+  speechSynthesis.speak(u);
+}
+if ("speechSynthesis" in window){ loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; setTimeout(loadVoices, 800); }
+
+/* ---------- AI 연결 (여러 무료 서비스) ---------- */
+const PROVIDERS = {
+  groq: {
+    label:"Groq", keyPh:"gsk_…", json:true,
+    steps:['<a href="https://console.groq.com/keys" target="_blank" rel="noopener">Groq 콘솔</a>에 구글 계정 등으로 가입·로그인해요.','‘Create API Key’를 눌러 키를 복사해요.','아래에 붙여넣고 ‘연결 확인’을 눌러요.'],
+    privacy:"Groq 무료 등급은 분당 사용량 한도가 있어서, 긴 메일은 묶음 사이에 잠깐 기다릴 수 있어요.",
+    defaultModel:"llama-3.3-70b-versatile",
+    async list(key){ const j = await getJSON("https://api.groq.com/openai/v1/models", key);
+      return (j.data||[]).map(m=>m.id).filter(id => !/whisper|tts|guard|playai|orpheus|distil|compound|safeguard|allam/i.test(id)); },
+    rank:id => (/gpt-oss-120b/.test(id)?6:0)+(/llama-3\.3-70b/.test(id)?5:0)+(/kimi|qwen3|llama-4-maverick/.test(id)?4:0)+(/8b|instant|20b/.test(id)?-2:0),
+    chatUrl:"https://api.groq.com/openai/v1/chat/completions"
+  },
+  github: {
+    label:"GitHub Models", keyPh:"github_pat_…", json:true,
+    steps:['GitHub에 로그인한 뒤 <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">새 토큰 만들기</a> 화면을 열어요.','이름을 적고, Permissions에서 ‘Models’를 Read-only로 선택한 뒤 토큰을 생성해요.','생성된 토큰을 복사해 아래에 붙여넣고 ‘연결 확인’을 눌러요.'],
+    privacy:"GitHub Models 무료 사용은 하루 요청 수 한도가 있어요. 업무 메일 내용을 넣어도 되는지는 회사 정책을 확인해 주세요.",
+    defaultModel:"openai/gpt-4.1-mini",
+    async list(){ const j = await getJSON("https://models.github.ai/catalog/models");
+      return (Array.isArray(j)?j:[]).filter(m => (m.supported_output_modalities||["text"]).includes("text") && !/embed/i.test(m.id)).map(m=>m.id); },
+    rank:id => (/gpt-4\.1-mini/.test(id)?6:0)+(/gpt-4\.1$|gpt-4o$/.test(id)?5:0)+(/gpt-4o-mini|deepseek-v3/.test(id)?4:0)+(/nano|phi|o1|o3|o4|r1|reason/i.test(id)?-3:0),
+    chatUrl:"https://models.github.ai/inference/chat/completions"
+  },
+  openrouter: {
+    label:"OpenRouter", keyPh:"sk-or-…", json:false,
+    steps:['<a href="https://openrouter.ai/keys" target="_blank" rel="noopener">OpenRouter</a>에 가입·로그인해요.','‘Create Key’를 눌러 키를 복사해요. 결제 정보는 넣지 않아도 돼요.','아래에 붙여넣고 ‘연결 확인’을 눌러요. 이름 끝이 (free)인 모델만 무료예요.'],
+    privacy:"OpenRouter의 일부 무료 모델은 입력 내용을 기록하거나 학습에 쓸 수 있어요. 민감한 업무 메일은 넣지 않는 게 좋아요.",
+    defaultModel:"meta-llama/llama-3.3-70b-instruct:free",
+    async list(){ const j = await getJSON("https://openrouter.ai/api/v1/models");
+      return (j.data||[]).map(m=>m.id).filter(id => /:free$/.test(id)); },
+    rank:id => (/llama-3\.3-70b|deepseek-chat|deepseek-v3/.test(id)?5:0)+(/qwen|gemma-3-27b|mistral-small|gpt-oss/.test(id)?3:0)+(/r1|think|reason|vl|vision|coder/i.test(id)?-3:0),
+    chatUrl:"https://openrouter.ai/api/v1/chat/completions"
+  },
+  gemini: {
+    label:"Google Gemini", keyPh:"AIza…", json:true,
+    steps:['<a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">Google AI Studio</a>에 구글 계정으로 로그인해요.','‘API 키 만들기’를 눌러 키를 복사해요.','아래에 붙여넣고 ‘연결 확인’을 눌러요.'],
+    privacy:"Gemini 무료 등급에서는 입력 내용이 Google 모델 개선에 쓰일 수 있어요. 회사 네트워크에서 막혀 있을 수 있어요.",
+    defaultModel:"models/gemini-2.5-flash",
+    async list(key){
+      const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models?pageSize=200", { headers:{ "x-goog-api-key":key } });
+      if (!r.ok) throw await apiError(r);
+      const j = await r.json();
+      return (j.models||[]).filter(m => (m.supportedGenerationMethods||[]).includes("generateContent") && /gemini/i.test(m.name) && !/image|tts|audio|live|embed|vision|robotic|computer|nano/i.test(m.name)).map(m=>m.name);
+    },
+    rank:id => (/flash/.test(id)?3:0)+(/lite/.test(id)?-1:0)+(/preview|exp/.test(id)?-0.5:0)+((id.match(/gemini-(\d+(?:\.\d+)?)/)||[0,0])[1]*0.1)
+  }
+};
+function prov(){ const p = lsGet(K.provider); return PROVIDERS[p] ? p : "groq"; }
+function getKey(p = prov()){ return lsGet("doc-vi.key." + p) || ""; }
+function getModel(p = prov()){ return lsGet("doc-vi.model." + p) || PROVIDERS[p].defaultModel; }
+async function getJSON(url, key){
+  const r = await fetch(url, key ? { headers:{ Authorization:"Bearer " + key } } : {});
+  if (!r.ok) throw await apiError(r);
+  return r.json();
+}
+async function apiError(r){
+  let msg = ""; try{ const j = await r.json(); msg = j?.error?.message || j?.message || ""; }catch{}
+  const e = new Error(msg); e.status = r.status; return e;
+}
+function parseJSON(text){
+  text = String(text||"").replace(/^\s*```(?:json)?\s*|\s*```\s*$/g, "");
+  try{ return JSON.parse(text); }catch{}
+  const a = text.indexOf("{"), b = text.lastIndexOf("}");
+  if (a >= 0 && b > a) return JSON.parse(text.slice(a, b+1));
+  throw new SyntaxError("no json");
+}
+const sleep = (ms, signal) => new Promise((res, rej) => { const t = setTimeout(res, ms); signal?.addEventListener("abort", () => { clearTimeout(t); rej(new DOMException("aborted","AbortError")); }, { once:true }); });
+
+async function rawCall(p, key, model, prompt, signal, useJson){
+  if (p === "gemini"){
+    const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/${model}:generateContent`, {
+      method:"POST", signal, headers:{ "Content-Type":"application/json", "x-goog-api-key":key },
+      body: JSON.stringify({ contents:[{ role:"user", parts:[{ text:prompt }] }], generationConfig:{ responseMimeType:"application/json", temperature:0.2 } })
+    });
+    if (!r.ok) throw await apiError(r);
+    const j = await r.json();
+    return (j.candidates?.[0]?.content?.parts||[]).map(x => x.text||"").join("");
+  }
+  const body = { model, temperature:0.2, messages:[
+    { role:"system", content:"You are a precise assistant. Reply with valid JSON only, no markdown." },
+    { role:"user", content:prompt } ] };
+  if (useJson) body.response_format = { type:"json_object" };
+  const r = await fetch(PROVIDERS[p].chatUrl, { method:"POST", signal,
+    headers:{ "Content-Type":"application/json", Authorization:"Bearer " + key }, body: JSON.stringify(body) });
+  if (!r.ok) throw await apiError(r);
+  const j = await r.json();
+  return j.choices?.[0]?.message?.content || "";
+}
+async function callLLM(prompt, signal, onWait){
+  const p = prov(), key = getKey(p), model = getModel(p);
+  let useJson = PROVIDERS[p].json;
+  for (let attempt = 0; attempt < 2; attempt++){
+    try{
+      const text = await rawCall(p, key, model, prompt, signal, useJson);
+      if (!text){ const e = new Error("empty"); e.status = "empty"; throw e; }
+      return parseJSON(text);
+    }catch(e){
+      if (attempt === 0 && e.status === 429){ onWait?.(); await sleep(15000, signal); continue; }       // 한도에 걸리면 한 번만 기다렸다 다시
+      if (attempt === 0 && e.status === 400 && useJson && /response_format|json/i.test(e.message)){ useJson = false; continue; }
+      if (attempt === 0 && e instanceof SyntaxError){ continue; }
+      throw e;
+    }
+  }
+}
+function errCopy(e){
+  if (e?.name === "AbortError") return "분석을 멈췄어요.";
+  if (e instanceof SyntaxError) return "결과를 읽지 못했어요. 다시 누르거나 설정에서 다른 모델을 골라 보세요.";
+  switch(e?.status){
+    case 400: return "요청이 거절됐어요. 설정에서 다른 모델을 골라 보세요.";
+    case 401: case 403: return "API 키가 맞지 않거나 권한이 없어요. 설정에서 키를 다시 확인해 주세요.";
+    case 404: return "선택한 모델을 찾을 수 없어요. 설정에서 ‘연결 확인’을 눌러 모델을 다시 고르세요.";
+    case 413: return "글이 너무 길어요. 메일을 나눠서 분석해 주세요.";
+    case 429: return "무료 사용량 한도에 걸렸어요. 1분쯤 뒤에 다시 누르거나, 설정에서 다른 모델·서비스로 바꿔 보세요.";
+    case "empty": return "AI가 빈 답을 보냈어요. 다시 시도해 주세요.";
+    default: return navigator.onLine === false ? "인터넷 연결을 확인해 주세요." : "연결에 실패했어요. 회사 네트워크에서 막혔을 수 있으니 설정에서 다른 서비스를 골라 보세요.";
+  }
+}
+
+
+
+/* ---------- 문장 분리 (문단 기억) ---------- */
+function splitSentences(text){
+  const out = []; let para = 0;
+  text.replace(/\r/g,"").split(/\n+/).forEach(line => {
+    line = line.trim(); if (!line) return;
+    (line.match(/[^.!?…]+(?:[.!?…]+["”’)]*|$)/g) || [line]).forEach(p => { p = p.trim(); if (p) out.push({ text:p, para }); });
+    para++;
+  });
+  return out;
+}
+function batches(sents){
+  const res = []; let cur = [], len = 0;
+  for (const s of sents){
+    if (cur.length && (len + s.text.length > 600 || cur.length >= 4)){ res.push(cur); cur=[]; len=0; }
+    cur.push(s); len += s.text.length;
+  }
+  if (cur.length) res.push(cur);
+  return res;
+}
+
+/* ---------- 프롬프트 ---------- */
+function buildPrompt(sents, lang){
+  const L = LANGS[lang].name;
+  return `You are a Vietnamese tutor for a Korean business professional who reads Vietnamese work emails.
+For each numbered sentence, give a translation and a learner-friendly breakdown. Write all translations, glosses, meanings and notes in ${L}.
+
+Return ONLY JSON:
+{"sentences":[{
+ "translation": "natural, business-appropriate ${L} translation",
+ "clauses": [
+   {"chunks":[{"text":"exact piece of the original","role":"subject|predicate|object|complement|adverbial|modifier|connector|particle|other","gloss":"short ${L} meaning"}]}
+ ],
+ "notes": ["1-2 short, useful grammar or usage points for a learner"],
+ "words": [{"word":"Vietnamese word or compound","pos":"part of speech in ${L}","meaning":"meaning in this context in ${L}","hanviet":"Chinese characters if Sino-Vietnamese, else empty","hanko":"Korean hanja reading (e.g. 관리), else empty","pron":"approximate pronunciation in Korean Hangul (e.g. 꽌 리)"}]
+}]}
+
+How to split:
+- Split a long sentence into its clauses (each verb phrase with its own subject/object is a clause). Put a linking word like "vì vậy", "và", "nhưng" as a "connector" chunk at the start of the clause it introduces.
+- Inside a clause, make SHORT chunks of 1-4 words. Separate the verb from its object: "sử dụng" (predicate) and "đơn vị VNĐ" (object) are two chunks. Polite request markers like "vui lòng", "xin" are "adverbial". Negation "không" goes with the predicate. A phrase describing a noun is a separate "modifier" chunk right after it.
+- Chunks in order must cover the whole sentence.
+- "words": every content word or compound worth learning, including ones inside chunks (treat compounds like "thanh toán", "tỷ giá", "hợp đồng" as one word). Skip names and numbers.
+- Return exactly ${sents.length} items in the same order. Be concise.
+
+Sentences:
+${sents.map((s,i)=>`${i+1}. ${s.text}`).join("\n")}`;
+}
+
+/* ---------- 번역 실행 ---------- */
+async function analyze(){
+  const text = $("#src").value.trim();
+  if (!text){ setStatus("번역할 문장을 먼저 붙여넣어 주세요.", true); return; }
+  if (!getKey()){ $("#keyNote").hidden = false; setStatus("AI 서비스 키가 필요해요.", true); return; }
+  const lang = state.lang;
+  const groups = batches(splitSentences(text));
+  state.busy = true; state.ctl = new AbortController(); state.srcText = text;
+  state.openRows.clear(); state.sel.clear();
+  const res = { src:text, sentences:[] }; state.results[lang] = res;
+  renderButtons(); render();
+  try{
+    for (let i=0;i<groups.length;i++){
+      setStatus(groups.length > 1 ? `번역 중… (${i+1}/${groups.length})` : "번역 중…");
+      const out = await callLLM(buildPrompt(groups[i], lang), state.ctl.signal, () => setStatus("무료 사용량 한도에 걸려 15초 기다렸다가 이어서 번역할게요…"));
+      const arr = Array.isArray(out?.sentences) ? out.sentences : [];
+      groups[i].forEach((s,j) => res.sentences.push(normalize(arr[j], s)));
+      render();
+      if (i < groups.length - 1) await new Promise(r => setTimeout(r, 1500));
+    }
+    setStatus("");
+    lsSet(K.last, { lang, src:text, results: state.results });
+  }catch(e){
+    console.warn(e); setStatus(errCopy(e), e?.name !== "AbortError");
+  }finally{
+    state.busy = false; state.ctl = null; renderButtons(); render();
+  }
+}
+function normalize(x, s){
+  x = x && typeof x === "object" ? x : {};
+  const fix = c => ({ text:String(c.text), role: c.role in ROLES ? c.role : "other", gloss:String(c.gloss||"") });
+  let clauses = (Array.isArray(x.clauses) ? x.clauses : [])
+    .map(cl => (Array.isArray(cl?.chunks) ? cl.chunks : []).filter(c => c && c.text).map(fix))
+    .filter(cl => cl.length);
+  if (!clauses.length && Array.isArray(x.chunks)) clauses = [x.chunks.filter(c => c && c.text).map(fix)];
+  return {
+    vi: s.text, para: s.para, translation:String(x.translation||""), clauses,
+    notes:(Array.isArray(x.notes)?x.notes:[]).map(String).slice(0,3),
+    words:(Array.isArray(x.words)?x.words:[]).filter(w => w && w.word).map(w => ({
+      word:String(w.word).trim(), pos:String(w.pos||""), meaning:String(w.meaning||""),
+      hanviet:String(w.hanviet||""), hanko:String(w.hanko||""), pron:String(w.pron||"") }))
+  };
+}
+function setStatus(msg, err){ const el = $("#status"); el.textContent = msg || ""; el.classList.toggle("err", !!err); }
+function renderButtons(){
+  const go = $("#goBtn");
+  go.textContent = state.busy ? "멈추기" : "번역하기";
+  go.classList.toggle("primary", !state.busy);
+  document.querySelectorAll("#langSeg button").forEach(b => { b.setAttribute("aria-pressed", String(b.dataset.lang === state.lang)); b.disabled = state.busy; });
+  $("#keyNote").hidden = !!getKey();
+}
+
+/* ---------- 이 글의 단어 모으기 ---------- */
+function collectWords(res){
+  const m = new Map();
+  (res?.sentences || []).forEach(s => s.words.forEach(w => {
+    const id = wordId(w.word);
+    if (!m.has(id)) m.set(id, { ...w, id, example:s.vi, exampleTr:s.translation });
+  }));
+  return [...m.values()];
+}
+
+/* ---------- 결과 그리기 ---------- */
+function render(){
+  const box = $("#result");
+  const res = state.results[state.lang];
+  if (!res || (!res.sentences.length && !state.busy)){ box.innerHTML = ""; return; }
+  const words = collectWords(res);
+  const tab = (id, label, n) => `<button role="tab" data-act="view" data-view="${id}" aria-selected="${state.view===id}">${label}${n!=null?`<span class="n">${n}</span>`:""}</button>`;
+  let body = "";
+  if (!res.sentences.length) body = `<p class="hint">번역 중이에요…</p>`;
+  else if (state.view === "tr") body = trView(res);
+  else if (state.view === "learn") body = learnView(res);
+  else body = wordsView(words);
+  box.innerHTML = `<div class="card" style="margin-top:14px">
+    <div class="res-head">
+      <span class="lang-tag">${LANGS[state.lang].label}</span>
+      <span class="spacer"></span>
+      <button class="icon-btn" data-act="play-all" aria-label="원문 전체 듣기" title="원문 전체 듣기">${I.play}</button>
+      <button class="icon-btn ${state.slow?"on":""}" data-act="slow" aria-pressed="${state.slow}" aria-label="천천히 듣기" title="천천히 듣기">${I.slow}</button>
+      <button class="icon-btn" data-act="copy" aria-label="번역 복사" title="번역 복사">${I.copy}</button>
+    </div>
+    <div class="res-tabs" role="tablist">${tab("tr","번역")}${tab("learn","문장 학습", res.sentences.length)}${tab("words","단어", words.length)}</div>
+    <div class="res-body">${body}</div>
+  </div>`;
+}
+function paragraphs(res){
+  const out = []; res.sentences.forEach(s => { (out[s.para] ||= []).push(s.translation); });
+  return out.filter(Boolean).map(p => p.filter(Boolean).join(" ")).filter(Boolean);
+}
+function trView(res){
+  return `<div class="translation">${paragraphs(res).map(p => `<p>${esc(p)}</p>`).join("")}</div>`;
+}
+function learnView(res){
+  return `<div class="slist">${res.sentences.map((s, si) => {
+    const open = state.openRows.has(si);
+    return `<div class="srow">
+      <div class="s-main">
+        <span class="s-num">${si+1}</span>
+        <div class="s-vi">${esc(s.vi)}</div>
+        <div class="s-acts"><button class="icon-btn" data-act="play-sent" data-si="${si}" aria-label="문장 듣기">${I.play}</button></div>
+        <div class="s-tr">${esc(s.translation)}</div>
+        ${s.clauses.length ? `<button class="s-toggle" data-act="toggle" data-si="${si}" aria-expanded="${open}">${open?"구조 접기":"구조 보기"} ${I.down}</button>` : ""}
+      </div>
+      ${open ? detailView(s) : ""}
+    </div>`; }).join("")}</div>`;
+}
+function detailView(s){
+  const cls = r => ({ predicate:"core pred", subject:"core subj", object:"core obj", complement:"core obj" }[r] || (["connector","particle","other"].includes(r) ? "minor" : ""));
+  const clauses = s.clauses.map(cl => `<div class="clause"><div class="il-row">${cl.map(c =>
+    `<button class="il ${cls(c.role)}" data-act="say" data-text="${esc(c.text)}" title="눌러서 듣기">
+       <span class="tag">${ROLES[c.role] || "&nbsp;"}</span>
+       <span class="v">${esc(c.text)}</span>
+       ${c.gloss ? `<span class="g">${esc(c.gloss)}</span>` : ""}
+     </button>`).join("")}</div></div>`).join("");
+  return `<div class="s-detail">
+    ${clauses}
+    <div class="key" aria-hidden="true"><span><i class="k-subj"></i>주어</span><span><i class="k-pred"></i>서술어</span><span><i class="k-obj"></i>목적어</span><span>덩어리를 누르면 발음을 들을 수 있어요</span></div>
+    ${s.notes.length ? `<div class="tips"><h4>문법 포인트</h4><ul>${s.notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul></div>` : ""}
+  </div>`;
+}
+function wordsView(words){
+  if (!words.length) return `<p class="hint">이 글에서 뽑은 단어가 없어요.</p>`;
+  const unsaved = words.filter(w => !state.words.has(w.id));
+  const allOn = unsaved.length > 0 && unsaved.every(w => state.sel.has(w.id));
+  const n = [...state.sel].filter(id => !state.words.has(id)).length;
+  return `<div class="w-bar">
+      <label class="chk"><input type="checkbox" data-act="sel-all" ${allOn?"checked":""} ${unsaved.length?"":"disabled"}> 전체 선택</label>
+      <span class="spacer"></span>
+      <span class="hint">${words.length}개 중 ${words.length-unsaved.length}개 저장됨</span>
+    </div>
+    ${words.map(w => { const saved = state.words.has(w.id); return `
+      <div class="wrow">
+        <input type="checkbox" data-act="sel" data-id="${w.id}" aria-label="${esc(w.word)} 선택" ${saved||state.sel.has(w.id)?"checked":""} ${saved?"disabled":""}>
+        <div>
+          <div class="w-word">${esc(w.word)}${w.pron?`<span class="w-pron">${esc(w.pron)}</span>`:""}</div>
+          <div class="w-mean">${esc(w.meaning)}</div>
+          ${(w.pos||w.hanviet)?`<div class="w-meta">${esc(w.pos)}${w.pos&&w.hanviet?" · ":""}${w.hanviet?`${esc(w.hanviet)} ${esc(w.hanko)}`:""}</div>`:""}
+        </div>
+        <div class="w-right">${saved?`<span class="badge">저장됨</span>`:""}<button class="icon-btn" data-act="say" data-text="${esc(w.word)}" aria-label="${esc(w.word)} 듣기">${I.play}</button></div>
+      </div>`; }).join("")}
+    <div class="sticky-save"><button class="btn primary" data-act="save-sel" ${n?"":"disabled"}>${n?`선택한 단어 ${n}개 단어장에 저장`:"저장할 단어를 선택하세요"}</button></div>`;
+}
+
+/* ---------- 단어장 ---------- */
+function wordId(word){
+  const s = word.normalize("NFC").toLowerCase().trim();
+  let h1 = 0x811c9dc5, h2 = 0x01000193;
+  for (let i=0;i<s.length;i++){ const c=s.charCodeAt(i); h1 = Math.imul(h1 ^ c, 16777619); h2 = Math.imul(h2 + c, 2654435761); }
+  return "w" + (h1>>>0).toString(16) + (h2>>>0).toString(16);
+}
+function saveWords(){ lsSet(K.words, Object.fromEntries(state.words)); }
+function saveSelected(){
+  const words = collectWords(state.results[state.lang]);
+  let n = 0; const now = Date.now();
+  words.forEach(w => {
+    if (!state.sel.has(w.id) || state.words.has(w.id)) return;
+    state.words.set(w.id, { word:w.word, meaning:w.meaning, pos:w.pos, hanviet:w.hanviet, hanko:w.hanko, pron:w.pron,
+      lang:state.lang, example:w.example, exampleTr:w.exampleTr, box:1, due:now, added:now + n, updated:now });
+    n++;
+  });
+  state.sel.clear(); saveWords(); afterWordsChange();
+  setStatus(n ? `${n}개 단어를 단어장에 저장했어요.` : "");
+}
+function afterWordsChange(){ render(); renderWords(); renderReview(); updateDue(); }
+function renderWords(){
+  const q = ($("#wSearch").value || "").trim().toLowerCase();
+  const all = [...state.words.entries()].sort((a,b) => b[1].added - a[1].added);
+  const list = q ? all.filter(([,w]) => (w.word+" "+w.meaning+" "+w.hanviet+" "+w.hanko).toLowerCase().includes(q)) : all;
+  $("#wTotal").textContent = all.length ? `${all.length}개` : "";
+  const el = $("#wList");
+  if (!all.length){ el.innerHTML = `<div class="card"><div class="empty"><p>아직 저장한 단어가 없어요.</p><p class="hint">번역 결과의 ‘단어’ 탭에서 필요한 단어를 골라 저장하세요.</p><a class="btn primary" href="#analyze">번역하러 가기</a></div></div>`; return; }
+  if (!list.length){ el.innerHTML = `<div class="card"><div class="empty"><p>‘${esc(q)}’에 맞는 단어가 없어요.</p></div></div>`; return; }
+  el.innerHTML = `<div class="card wlist">${list.map(([id,w]) => `
+    <div class="witem">
+      <button class="icon-btn" data-act="say" data-text="${esc(w.word)}" aria-label="${esc(w.word)} 듣기">${I.play}</button>
+      <div class="wi-main">
+        <div class="w-word">${esc(w.word)}${w.pron?`<span class="w-pron">${esc(w.pron)}</span>`:""}</div>
+        <div class="w-mean">${esc(w.meaning)}</div>
+        ${w.hanviet?`<div class="w-meta">${esc(w.hanviet)} ${esc(w.hanko)}</div>`:""}
+        ${w.example?`<div class="wi-ex" title="${esc(w.example)}">${esc(w.example)}</div>`:""}
+      </div>
+      <div class="w-right"><span class="wi-box">${w.box>=5?"익힘":`${w.box}단계`}</span><button class="icon-btn" data-act="del" data-id="${id}" aria-label="${esc(w.word)} 삭제">${I.del}</button></div>
+    </div>`).join("")}</div>`;
+}
+
+/* ---------- 복습 ---------- */
+let rv = { id:null, flipped:false };
+function dueList(){ const now = Date.now(); return [...state.words.entries()].filter(([,w]) => (w.due||0) <= now).sort((a,b) => (a[1].due||0) - (b[1].due||0)); }
+function updateDue(){ const n = dueList().length; const el = $("#dueCount"); el.hidden = !n; el.textContent = n; }
+function renderReview(){
+  const box = $("#reviewBox"); const due = dueList();
+  if (!state.words.size){ box.innerHTML = `<div class="card flash"><p>복습할 단어가 아직 없어요.</p><a class="btn primary" href="#analyze">번역하러 가기</a></div>`; return; }
+  if (!due.length){
+    const d = new Date(Math.min(...[...state.words.values()].map(w => w.due||0)));
+    box.innerHTML = `<div class="card flash"><p class="cm">오늘 복습할 단어를 모두 끝냈어요.</p><p class="hint">다음 복습: ${d.toLocaleDateString("ko-KR",{month:"long",day:"numeric"})} ${d.toLocaleTimeString("ko-KR",{hour:"2-digit",minute:"2-digit"})}</p><button class="btn" data-act="review-all">전체 다시 보기</button></div>`;
+    return;
+  }
+  if (!rv.id || !due.find(([id]) => id === rv.id)) rv = { id:due[0][0], flipped:false };
+  const w = state.words.get(rv.id);
+  box.innerHTML = `
+    <div class="review-meta"><span>남은 카드 ${due.length}장</span><span>${w.box>=5?"익힘":`${w.box}단계`}</span></div>
+    <div class="card flash">
+      <div class="cw">${esc(w.word)}</div>
+      <button class="icon-btn" data-act="say" data-text="${esc(w.word)}" aria-label="듣기">${I.play}</button>
+      ${rv.flipped ? `
+        ${w.pron?`<div class="cp">[${esc(w.pron)}]</div>`:""}
+        <div class="cm">${esc(w.meaning)}</div>
+        ${w.hanviet?`<div class="ch">${esc(w.hanviet)} ${esc(w.hanko)}</div>`:""}
+        ${w.example?`<div class="ce">${esc(w.example)}</div>`:""}
+        ${w.exampleTr?`<div class="ct">${esc(w.exampleTr)}</div>`:""}` : `<p class="hint">뜻을 떠올려 본 뒤 확인하세요</p>`}
+    </div>
+    ${rv.flipped
+      ? `<div class="review-actions"><button class="btn" data-act="grade" data-ok="0">다시 볼래요</button><button class="btn primary" data-act="grade" data-ok="1">알고 있어요</button></div>`
+      : `<div class="review-actions" style="grid-template-columns:1fr"><button class="btn primary" data-act="flip">뜻 확인하기</button></div>`}`;
+}
+function grade(ok){
+  const w = state.words.get(rv.id); if (!w) return;
+  const box = ok ? Math.min(5, (w.box||1) + 1) : 1;
+  const due = ok ? Date.now() + BOX_DAYS[box] * 864e5 : Date.now() + 60e3;
+  state.words.set(rv.id, { ...w, box, due, updated:Date.now() });
+  rv = { id:null, flipped:false }; saveWords(); afterWordsChange();
+}
+
+/* ---------- 내보내기 / 가져오기 ---------- */
+function exportWords(){
+  const data = JSON.stringify({ app:"doc-vi", version:2, exported:new Date().toISOString(), words:Object.fromEntries(state.words) }, null, 2);
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([data], { type:"application/json" }));
+  a.download = `베트남어-단어장-${new Date().toISOString().slice(0,10)}.json`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  $("#ioStatus").textContent = `${state.words.size}개 단어를 파일로 내보냈어요.`;
+}
+async function importWords(file){
+  const st = $("#ioStatus");
+  try{
+    const j = JSON.parse(await file.text());
+    let added = 0, updated = 0;
+    for (const [id, w] of Object.entries(j.words || {})){
+      if (!w || !w.word) continue;
+      const cur = state.words.get(id);
+      if (!cur){ state.words.set(id, w); added++; }
+      else if ((w.updated||0) > (cur.updated||0)){ state.words.set(id, w); updated++; }
+    }
+    saveWords(); afterWordsChange();
+    st.classList.remove("err"); st.textContent = `새 단어 ${added}개, 갱신 ${updated}개를 가져왔어요.`;
+  }catch{ st.classList.add("err"); st.textContent = "단어장 파일을 읽지 못했어요. 이 앱에서 내보낸 .json 파일인지 확인해 주세요."; }
+}
+
+/* ---------- 설정 ---------- */
+function fillModelSelect(ids){
+  const p = prov(), cur = getModel(p), sel = $("#model");
+  const list = ids && ids.length ? ids : [cur];
+  const label = id => id.replace(/^models\//,"");
+  sel.innerHTML = list.map(id => `<option value="${esc(id)}" ${id===cur?"selected":""}>${esc(label(id))}</option>`).join("");
+  if (!list.includes(cur)){ sel.selectedIndex = 0; lsSet("doc-vi.model." + p, sel.value); }
+}
+function renderProvider(){
+  const p = prov(), P = PROVIDERS[p];
+  $("#provider").value = p;
+  $("#keySteps").innerHTML = P.steps.map(s => `<li>${s}</li>`).join("");
+  $("#apiKey").placeholder = P.keyPh; $("#apiKey").value = getKey(p);
+  $("#privacyNote").textContent = P.privacy;
+  $("#keyStatus").textContent = ""; $("#keyStatus").classList.remove("err");
+  fillModelSelect(lsGet("doc-vi.models." + p));
+  renderButtons();
+}
+async function checkKey(){
+  const p = prov(), P = PROVIDERS[p];
+  const key = $("#apiKey").value.trim(); const st = $("#keyStatus");
+  if (!key){ st.classList.add("err"); st.textContent = "API 키를 붙여넣어 주세요."; return; }
+  st.classList.remove("err"); st.textContent = "모델 목록을 불러오는 중…";
+  $("#saveKey").disabled = true;
+  try{
+    let ids = await P.list(key);
+    ids = [...new Set(ids)].sort((a,b) => (P.rank(b) - P.rank(a)) || a.localeCompare(b));
+    if (!ids.length) throw Object.assign(new Error("no models"), { status:"nomodels" });
+    lsSet("doc-vi.models." + p, ids);
+    if (!ids.includes(getModel(p))) lsSet("doc-vi.model." + p, ids[0]);
+    fillModelSelect(ids);
+    st.textContent = "키를 확인하는 중…";
+    const test = await rawCall(p, key, getModel(p), 'Reply with this JSON only: {"ok":true}', undefined, P.json).catch(async e => {
+      if (e.status === 400 && P.json) return rawCall(p, key, getModel(p), 'Reply with this JSON only: {"ok":true}', undefined, false);
+      throw e; });
+    if (!test) throw Object.assign(new Error("empty"), { status:"empty" });
+    lsSet("doc-vi.key." + p, key);
+    st.textContent = `${P.label}에 연결됐어요. 모델 ${ids.length}개 중 위쪽 추천 모델이 선택돼 있어요. 이제 분석 탭에서 바로 쓸 수 있어요.`;
+    renderButtons();
+  }catch(e){
+    console.warn(e);
+    st.classList.add("err");
+    st.textContent =
+      e.status === 401 || e.status === 403 ? "키가 맞지 않거나 권한이 없어요. 복사한 키를 다시 붙여넣어 주세요." + (p==="github" ? " GitHub 토큰은 Models 권한(Read-only)이 있어야 해요." : "") :
+      e.status === 429 ? "지금은 사용량 한도에 걸렸어요. 1분 뒤에 다시 눌러 주세요." :
+      e.status === "nomodels" ? "쓸 수 있는 무료 모델을 찾지 못했어요." :
+      e.status ? `연결은 됐지만 오류가 났어요 (${e.status}). 모델을 바꿔서 다시 눌러 보세요.` :
+      "이 PC에서 연결되지 않아요. 회사 네트워크에서 막혔을 수 있으니 다른 서비스를 골라 보세요.";
+  }finally{ $("#saveKey").disabled = false; }
+}
+
+
+
+/* ---------- 테마 ---------- */
+const THEMES = [
+  { id:"auto", name:"자동" }, { id:"light", name:"라이트" }, { id:"dark", name:"다크" },
+  { id:"paper", name:"종이" }, { id:"night", name:"밤바다" },
+  { id:"contrast", name:"고대비" }, { id:"contrast-dark", name:"고대비 다크" }
+];
+function curTheme(){ const t = lsGet("doc-vi.theme"); return THEMES.some(x => x.id === t) ? t : "auto"; }
+function applyTheme(t){
+  if (t === "auto") document.documentElement.removeAttribute("data-theme");
+  else document.documentElement.setAttribute("data-theme", t);
+  lsSet("doc-vi.theme", t); renderThemes();
+}
+function renderThemes(){
+  const cur = curTheme();
+  $("#themeList").innerHTML = THEMES.map(t => `
+    <button class="theme-opt ${t.id==="auto"?"auto":""}" role="radio" aria-checked="${t.id===cur}" data-act="theme" data-theme-id="${t.id}" ${t.id==="auto"?"":`data-theme="${t.id}"`}>
+      <span class="pv"><span class="s">Xin chào</span><span class="a"></span></span>
+      <span class="nm">${t.id==="auto"?"자동 (기기 설정)":t.name}</span>
+    </button>`).join("");
+}
+
+/* ---------- 탭 ---------- */
+const TABS = ["analyze","words","review","settings"];
+function showTab(){
+  let t = location.hash.replace("#",""); if (!TABS.includes(t)) t = "analyze";
+  TABS.forEach(x => { $("#view-"+x).hidden = x !== t; });
+  document.querySelectorAll("nav.tabs a").forEach(a => a.setAttribute("aria-current", a.dataset.tab === t ? "page" : "false"));
+  if (t === "words") renderWords();
+  if (t === "review") renderReview();
+}
+window.addEventListener("hashchange", showTab);
+
+/* ---------- 이벤트 ---------- */
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-act]"); if (!b) return;
+  const act = b.dataset.act, res = state.results[state.lang];
+  if (act === "theme"){ applyTheme(b.dataset.themeId); }
+  else if (act === "view"){ state.view = b.dataset.view; render(); }
+  else if (act === "play-all"){ speak(res?.sentences.map(s => s.vi).join(" "), b); }
+  else if (act === "play-sent"){ speak(res?.sentences[+b.dataset.si]?.vi, b); }
+  else if (act === "say"){ speak(b.dataset.text, b.classList.contains("icon-btn") ? b : null); }
+  else if (act === "slow"){ state.slow = !state.slow; render(); }
+  else if (act === "copy"){
+    const t = paragraphs(res).join("\n\n");
+    (navigator.clipboard?.writeText(t) || Promise.reject()).then(() => setStatus("번역을 복사했어요."), () => setStatus("복사하지 못했어요. 번역 글을 직접 선택해서 복사해 주세요.", true));
+  }
+  else if (act === "toggle"){ const i = +b.dataset.si; state.openRows.has(i) ? state.openRows.delete(i) : state.openRows.add(i); render(); }
+  else if (act === "save-sel"){ saveSelected(); }
+  else if (act === "del"){ state.words.delete(b.dataset.id); saveWords(); afterWordsChange(); }
+  else if (act === "flip"){ rv.flipped = true; renderReview(); }
+  else if (act === "grade"){ grade(b.dataset.ok === "1"); }
+  else if (act === "review-all"){ const now = Date.now(); for (const [id,w] of state.words) state.words.set(id, { ...w, due:now }); saveWords(); afterWordsChange(); }
+});
+document.addEventListener("change", e => {
+  const b = e.target.closest("[data-act]"); if (!b) return;
+  if (b.dataset.act === "sel"){ b.checked ? state.sel.add(b.dataset.id) : state.sel.delete(b.dataset.id); render(); }
+  else if (b.dataset.act === "sel-all"){
+    const ws = collectWords(state.results[state.lang]).filter(w => !state.words.has(w.id));
+    ws.forEach(w => b.checked ? state.sel.add(w.id) : state.sel.delete(w.id)); render();
+  }
+});
+$("#goBtn").addEventListener("click", () => { if (state.busy) state.ctl?.abort(); else analyze(); });
+$("#clearBtn").addEventListener("click", () => { $("#src").value = ""; state.results = {}; state.srcText = ""; state.sel.clear(); state.openRows.clear(); setStatus(""); render(); lsSet(K.last, null); $("#src").focus(); });
+$("#wSearch").addEventListener("input", renderWords);
+$("#langSeg").addEventListener("click", e => {
+  const b = e.target.closest("button[data-lang]"); if (!b || state.busy) return;
+  state.lang = b.dataset.lang; state.sel.clear(); state.openRows.clear(); renderButtons();
+  const text = $("#src").value.trim(); const cached = state.results[state.lang];
+  if (cached && cached.src === text && cached.sentences.length) render();
+  else if (text && state.srcText === text) analyze();
+  else render();
+});
+$("#saveKey").addEventListener("click", checkKey);
+$("#forgetKey").addEventListener("click", () => { lsSet("doc-vi.key." + prov(), null); $("#apiKey").value = ""; $("#keyStatus").classList.remove("err"); $("#keyStatus").textContent = "이 기기에서 키를 지웠어요."; renderButtons(); });
+$("#model").addEventListener("change", e => lsSet("doc-vi.model." + prov(), e.target.value));
+$("#provider").addEventListener("change", e => { lsSet(K.provider, e.target.value); renderProvider(); });
+$("#voiceSel").addEventListener("change", e => { lsSet(K.voice, e.target.value); viVoice = viVoices.find(v => v.name === e.target.value) || null; });
+$("#testVoice").addEventListener("click", e => speak("Xin chào, rất vui được gặp anh.", e.currentTarget));
+$("#exportBtn").addEventListener("click", exportWords);
+$("#importFile").addEventListener("change", e => { const f = e.target.files?.[0]; if (f) importWords(f); e.target.value = ""; });
+
+/* ---------- 시작 ---------- */
+const last = lsGet(K.last);
+if (last && last.src){ $("#src").value = last.src; state.srcText = last.src; state.results = last.results || {}; state.lang = last.lang || "ko"; }
+const lw = lsGet(K.words); if (lw) Object.entries(lw).forEach(([id,w]) => state.words.set(id, w));
+renderProvider(); renderThemes(); render(); showTab(); updateDue();
+if (!getKey() && !location.hash) location.hash = "#settings";
+})();
+</script>
+</body>
+</html>
