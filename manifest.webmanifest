@@ -1,7 +1,7 @@
 {
-  "name": "Đọc · 베트남어 번역 노트",
+  "name": "Đọc · AI 문장 해부 노트",
   "short_name": "Đọc",
-  "description": "베트남어 메일을 번역하고, 문장 구조와 단어를 함께 배우는 번역 노트",
+  "description": "어떤 언어든 번역하고, 문장 구조와 단어를 함께 배우는 AI 번역 학습 노트",
   "lang": "ko",
   "start_url": "./",
   "scope": "./",
@@ -9,8 +9,23 @@
   "background_color": "#F4F1FF",
   "theme_color": "#F4F1FF",
   "icons": [
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }
